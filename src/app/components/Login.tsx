@@ -2,8 +2,7 @@
 
 import axios from "axios";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface LoginFormData {
   email: string;
@@ -26,11 +25,19 @@ export default function Login() {
       .then((response) => {
         setData(response.data);
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("data", JSON.stringify(response.data.data));
+
       })
       .catch((error) => {
         console.log(error);
       });
+
+
   };
+
+  if (data) {
+    location.replace('/');
+  } 
 
   return (
     <>
